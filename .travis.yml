@@ -1,19 +1,18 @@
 language: bash
 os: linux
-sudo: enabled
+dist: xenial
+
 env:
   global:
     - LC_ALL: C.UTF-8
     - LANG: C.UTF-8
 
 install:
-  - sudo apt update
   - sudo apt install -y snapd
   - sudo snap install lxd --channel 3.0/stable
   - sudo snap install snapcraft --candidate --classic
   - sudo /snap/bin/lxd waitready
   - sudo /snap/bin/lxd init --auto
-  - mkdir -p "$TRAVIS_BUILD_DIR/snaps-cache"
 script:
   - export PATH=/snap/bin:$PATH
   - sudo snapcraft cleanbuild
